@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cracker Connect</title>
+  
+  <!-- PWA & Mobile App Meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Professional Connectivity Hub for Cracker Gang">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="https://images.unsplash.com/photo-1550246140-5119ae4790b8?q=80&w=180&h=180&auto=format&fit=crop">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --app-height: 100%;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: black;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shine {
+      0% { left: -100%; }
+      20% { left: 100%; }
+      100% { left: 100%; }
+    }
+    @keyframes pulse-red {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.3; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    .animate-shine {
+      animation: shine 8s infinite;
+    }
+    .animate-pulse-red {
+      animation: pulse-red 4s infinite ease-in-out;
+    }
+    .font-oswald { font-family: 'Oswald', sans-serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    
+    .slant-background {
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    @media (max-width: 768px) {
+      .slant-background {
+        clip-path: none;
+      }
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Safe Area Insets for modern phones with notches */
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .pt-safe {
+      padding-top: env(safe-area-inset-top);
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-black text-white font-inter">
+  <div id="root"></div>
+  <script>
+    // Registration of a service worker for PWA functionality
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+          console.log('SW registration failed (expected in local dev environment)');
+        });
+      });
+    }
+  </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
